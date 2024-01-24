@@ -125,6 +125,7 @@ header {
   font-style: italic;
   font-weight: 400;
   margin-top: 2.4em;
+  color: #626c7f;
 }
 
 /* -------Style the answer section------- */
@@ -170,4 +171,24 @@ header {
 }
 .answer-D img {
   background-color: #f6e7ff;
+}
+
+/* Classes for Dark Mode */
+
+body.dark-mode::before {
+  background-image: url("./assets/images/pattern-background-desktop-dark.svg");
+}
+
+.dark-mode {
+  background-color: #313e51;
+  color: #fff;
+}
+
+.main_title p.dark-mode-p {
+  color: #abc1e1;
+}
+
+.dark-mode-children {
+  background-color: #3b4d66;
+  color: #fff;
 }
