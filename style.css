@@ -21,13 +21,30 @@
 body {
   font-family: "Rubik";
   font-style: normal;
+  background-color: #f4f6fa;
+  color: #313e51;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  background-image: url("./assets/images/pattern-background-desktop-light.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .container {
   margin-top: 97px;
-  margin-left: 140px;
-  margin-right: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1160px;
 }
+
+/* -------------------Style the header part------------------- */
 
 header {
   display: flex;
@@ -68,4 +85,89 @@ header {
 
 .toggleBrightness:checked::after {
   left: 70%;
+}
+
+/* -------------------Style the main part------------------- */
+
+/* Make all undesirable elements for welcoming page invisible */
+
+.answer_icon-A p,
+.answer_icon-B p,
+.answer_icon-C p,
+.answer_icon-D p,
+.submit_answer {
+  display: none;
+}
+
+.main_section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6.25em;
+}
+
+/* -------Style the question section------- */
+
+.question {
+  flex-basis: 465px;
+}
+
+.main_title h1 {
+  font-size: 4rem;
+  font-weight: 300;
+}
+
+.main_title span {
+  font-weight: 500;
+}
+
+.main_title p {
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 2.4em;
+}
+
+/* -------Style the answer section------- */
+
+.answer {
+  flex-basis: 564px;
+}
+
+[class^="answer-"] {
+  display: flex;
+  gap: 32px;
+  padding: 1.25em;
+  background-color: #fff;
+  border-radius: 1.5em;
+}
+
+.answer [class^="answer-"]:nth-child(-n + 3) {
+  margin-bottom: 1.5em;
+}
+
+[class^="answer_icon-"] img {
+  padding: 0.5em;
+  vertical-align: middle;
+  border-radius: 0.4em;
+}
+
+.answer_text {
+  align-self: center;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.answer-A img {
+  background-color: #fff1e9;
+}
+
+.answer-B img {
+  background-color: #e0fdef;
+}
+
+.answer-C img {
+  background-color: #ebf0ff;
+}
+.answer-D img {
+  background-color: #f6e7ff;
 }
