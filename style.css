@@ -38,7 +38,7 @@ body::before {
 }
 
 .container {
-  margin-top: 97px;
+  margin-top: 6.063em;
   margin-left: auto;
   margin-right: auto;
   max-width: 1160px;
@@ -191,4 +191,38 @@ body.dark-mode::before {
 .dark-mode-children {
   background-color: #3b4d66;
   color: #fff;
+}
+
+/* Implement Media Queries for tablet size */
+
+@media (max-width: 1200px) {
+  .container {
+    margin-top: 3.375em;
+    max-width: 640px;
+  }
+
+  /* -------------------Style the main part------------------- */
+  .main_section {
+    flex-direction: column;
+    margin-top: 3.938em;
+  }
+
+  .main_title p {
+    margin-top: 0.8em;
+  }
+
+  /* -------Style the question section------- */
+  .question {
+    flex-basis: auto;
+    margin-bottom: 4em;
+  }
+
+  /* -------Style the answer section------- */
+  .answer {
+    flex-basis: auto;
+  }
+
+  [class^="answer-"] {
+    padding: 0.75em;
+  }
 }
