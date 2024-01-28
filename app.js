@@ -1,8 +1,11 @@
 const toggleBrightnessBtn = document.querySelector(".toggleBrightness");
 const logoSun = document.querySelector(".logo_brightness-sun");
 const logoMoon = document.querySelector(".logo_brightness-moon");
+const logoHeader = document.querySelector(".logo_categories");
+const headerTitle = document.querySelector(".logo_categories-text");
 const mainTitleParagraph = document.querySelector(".main_title p");
 const answerParent = document.querySelector(".answer");
+const answerText = document.querySelectorAll(".answer_text");
 const answerChildren = answerParent.children;
 
 toggleBrightnessBtn.addEventListener("click", function () {
@@ -26,3 +29,28 @@ toggleBrightnessBtn.addEventListener("click", function () {
     }
   }
 });
+
+[...answerChildren].forEach((button) => {
+  button.addEventListener("click", function () {
+    switch (button.innerText) {
+      case "HTML":
+        appendToHeader(button.children[0].children[0], button.children[1]);
+        break;
+      case "CSS":
+        appendToHeader(button.children[0].children[0], button.children[1]);
+        break;
+      case "Javascript":
+        appendToHeader(button.children[0].children[0], button.children[1]);
+        break;
+      default:
+        appendToHeader(button.children[0].children[0], button.children[1]);
+    }
+  });
+});
+
+function appendToHeader(element, elementText) {
+  if (![...logoHeader.children].some((child) => child.tagName === "IMG")) {
+    headerTitle.innerText = elementText.innerText;
+    logoHeader.prepend(element);
+  }
+}
