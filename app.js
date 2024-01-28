@@ -3,10 +3,23 @@ const logoSun = document.querySelector(".logo_brightness-sun");
 const logoMoon = document.querySelector(".logo_brightness-moon");
 const logoHeader = document.querySelector(".logo_categories");
 const headerTitle = document.querySelector(".logo_categories-text");
-const mainTitleParagraph = document.querySelector(".main_title p");
+const mainTitleParagraph = document.querySelector(".welcoming_paragraph");
+const mainTitleQuestion = document.querySelector(".main_title_question");
+const answerIconText = document.querySelectorAll(".answer_icon-text");
 const answerParent = document.querySelector(".answer");
-const answerText = document.querySelectorAll(".answer_text");
-const answerChildren = answerParent.children;
+const answerChildren = document.querySelectorAll('[class^="answer-"]');
+
+let data = null;
+
+axios
+  .get("data.json")
+  .then((response) => {
+    data = response.data.quizzes;
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 toggleBrightnessBtn.addEventListener("click", function () {
   if (!document.body.classList.contains("dark-mode")) {
@@ -32,19 +45,9 @@ toggleBrightnessBtn.addEventListener("click", function () {
 
 [...answerChildren].forEach((button) => {
   button.addEventListener("click", function () {
-    switch (button.innerText) {
-      case "HTML":
-        appendToHeader(button.children[0].children[0], button.children[1]);
-        break;
-      case "CSS":
-        appendToHeader(button.children[0].children[0], button.children[1]);
-        break;
-      case "Javascript":
-        appendToHeader(button.children[0].children[0], button.children[1]);
-        break;
-      default:
-        appendToHeader(button.children[0].children[0], button.children[1]);
-    }
+    appendToHeader(button.children[0].children[0], button.children[1]);
+    displayQuestionsData(button.innerText);
+    displayNewIcons();
   });
 });
 
@@ -52,5 +55,32 @@ function appendToHeader(element, elementText) {
   if (![...logoHeader.children].some((child) => child.tagName === "IMG")) {
     headerTitle.innerText = elementText.innerText;
     logoHeader.prepend(element);
+    mainTitleParagraph.classList.add("invisible");
+    [...answerChildren]
+      .filter((element) => {
+        return element.children[0].children[0].tagName === "IMG";
+      })
+      .forEach((element) => {
+        element.children[0].children[0].classList.add("invisible");
+      });
   }
+}
+
+function displayQuestionsData(category) {
+  data.forEach((section) => {
+    if (category === section.title) {
+      mainTitleQuestion.innerHTML = section.questions[0].question;
+      for (let i = 0; i <= 3; i++) {
+        answerChildren[i].children[1].innerText =
+          section.questions[0].options[i];
+      }
+    }
+  });
+}
+
+function displayNewIcons() {
+  [...answerIconText].forEach((icon) => {
+    icon.classList.remove("invisible");
+    icon.classList.add("visible");
+  });
 }

@@ -36,8 +36,9 @@
       <main class="main_section">
         <div class="question">
           <div class="main_title">
-            <h1>Welcome to the <span>Frontend Quiz!</span></h1>
-            <p>Pick a subject to get started.</p>
+            <p class="number_of_questions invisible"></p>
+            <h1 class="main_title_question">Welcome to the <span>Frontend Quiz!</span></h1>
+            <p class="welcoming_paragraph">Pick a subject to get started.</p>
           </div>
           <div class="progress-container">
             <div class="progress-bar"></div>
@@ -51,7 +52,7 @@
                 alt="HTML closing tags"
                 class="answer_icon-A__img size"
               />
-              <p>A</p>
+              <p class="answer_icon-text invisible">A</p>
             </div>
             <p class="answer_text">HTML</p>
           </div>
@@ -62,7 +63,7 @@
                 alt="paint brush"
                 class="answer_icon-B__img size"
               />
-              <p>B</p>
+              <p class="answer_icon-text invisible">B</p>
             </div>
             <p class="answer_text">CSS</p>
           </div>
@@ -73,9 +74,9 @@
                 alt="JS capital letters"
                 class="answer_icon-C__img size"
               />
-              <p>C</p>
+              <p class="answer_icon-text invisible">C</p>
             </div>
-            <p class="answer_text">Javascript</p>
+            <p class="answer_text">JavaScript</p>
           </div>
           <div class="answer-D">
             <div class="answer_icon-D">
@@ -84,14 +85,15 @@
                 alt="human shape"
                 class="answer_icon-D__img size"
               />
-              <p>D</p>
+              <p class="answer_icon-text invisible">D</p>
             </div>
             <p class="answer_text">Accessibility</p>
           </div>
-          <div class="submit_answer">Submit Answer</div>
+          <div class="submit_answer invisible">Submit Answer</div>
         </div>
       </main>
     </div>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

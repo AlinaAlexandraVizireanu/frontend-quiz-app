@@ -96,12 +96,12 @@ header {
 
 /* Make all undesirable elements for welcoming page invisible */
 
-.answer_icon-A p,
-.answer_icon-B p,
-.answer_icon-C p,
-.answer_icon-D p,
-.submit_answer {
+.invisible {
   display: none;
+}
+
+.visible {
+  display: block;
 }
 
 .main_section {
@@ -116,7 +116,7 @@ header {
   flex-basis: 465px;
 }
 
-.main_title h1 {
+.main_title_question {
   font-size: 4rem;
   font-weight: 300;
 }
@@ -278,7 +278,7 @@ body.dark-mode::before {
     margin-bottom: 2.5em;
   }
 
-  .main_title h1 {
+  .main_title_question {
     font-size: 2.5rem;
     font-weight: 300;
   }
