@@ -8,7 +8,7 @@ const mainTitleQuestion = document.querySelector(".main_title_question");
 const answerIconText = document.querySelectorAll(".answer_icon-text");
 const answerParent = document.querySelector(".answer");
 const answerChildren = document.querySelectorAll('[class^="answer-"]');
-
+const submitBtn = document.querySelector(".submit_answer");
 let data = null;
 
 axios
@@ -47,7 +47,8 @@ toggleBrightnessBtn.addEventListener("click", function () {
   button.addEventListener("click", function () {
     appendToHeader(button.children[0].children[0], button.children[1]);
     displayQuestionsData(button.innerText);
-    displayNewIcons();
+    displayElements();
+    
   });
 });
 
@@ -78,9 +79,11 @@ function displayQuestionsData(category) {
   });
 }
 
-function displayNewIcons() {
+function displayElements() {
   [...answerIconText].forEach((icon) => {
     icon.classList.remove("invisible");
     icon.classList.add("visible");
   });
+  submitBtn.classList.remove("invisible");
+  submitBtn.classList.add("visible");
 }

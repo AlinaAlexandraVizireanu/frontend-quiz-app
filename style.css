@@ -148,9 +148,20 @@ header {
   cursor: pointer;
 }
 
-[class^="answer-"]:hover {
-  background-color: #abc1e1;
+[class^="answer-"]:hover .answer_icon-text {
+  color: #a729f5;
+  background-color: #f6e7ff;
 }
+
+/* [class^="answer-"]:focus {
+  border: 3px solid #a729f5;
+  outline: none;
+}
+
+[class^="answer-"]:focus .answer_icon-text {
+  color: #fff;
+  background-color: #a729f5;
+} */
 
 .answer [class^="answer-"]:nth-child(-n + 3) {
   margin-bottom: 1.5em;
@@ -182,6 +193,31 @@ img.size {
   padding: 0.5em;
   vertical-align: middle;
   border-radius: 0.4em;
+}
+
+p.answer_icon-text.visible {
+  font-size: 1.75rem;
+  font-weight: 500;
+  border-radius: 0.4em;
+  color: #626c7f;
+  background-color: #f4f6fa;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.submit_answer.visible {
+  font-size: 1.75rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 1.142em;
+  padding-top: 1.142em;
+  padding-bottom: 1.142em;
+  border-radius: 0.857em;
+  color: #fff;
+  background-color: #a729f5;
 }
 
 /* Classes for Dark Mode */
@@ -301,6 +337,12 @@ body.dark-mode::before {
     width: 40px;
     height: 40px;
     padding: 0.357em;
+  }
+
+  p.answer_icon-text.visible {
+    font-size: 1.125rem;
+    width: 40px;
+    height: 40px;
   }
 
   .answer_text {
