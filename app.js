@@ -5,11 +5,15 @@ const logoHeader = document.querySelector(".logo_categories");
 const headerTitle = document.querySelector(".logo_categories-text");
 const mainTitleParagraph = document.querySelector(".welcoming_paragraph");
 const mainTitleQuestion = document.querySelector(".main_title_question");
+const numberOfQuestions = document.querySelector(".number_of_questions");
 const answerIconText = document.querySelectorAll(".answer_icon-text");
 const answerParent = document.querySelector(".answer");
 const answerChildren = document.querySelectorAll('[class^="answer-"]');
 const submitBtn = document.querySelector(".submit_answer");
 let data = null;
+let questions = [];
+let counter = 0;
+let selectedAnswer = null;
 
 axios
   .get("data.json")
@@ -46,10 +50,18 @@ toggleBrightnessBtn.addEventListener("click", function () {
 [...answerChildren].forEach((button) => {
   button.addEventListener("click", function () {
     appendToHeader(button.children[0].children[0], button.children[1]);
-    displayQuestionsData(button.innerText);
+    getCategoryData(button.innerText);
     displayElements();
-    
+    select(button);
   });
+});
+
+submitBtn.addEventListener("click", function () {
+  if (questions[counter - 1].answer == selectedAnswer) {
+    setTimeout(displayQuestions, 2000);
+  } else {
+    console.log("wrong");
+  }
 });
 
 function appendToHeader(element, elementText) {
@@ -67,14 +79,11 @@ function appendToHeader(element, elementText) {
   }
 }
 
-function displayQuestionsData(category) {
+function getCategoryData(category) {
   data.forEach((section) => {
     if (category === section.title) {
-      mainTitleQuestion.innerHTML = section.questions[0].question;
-      for (let i = 0; i <= 3; i++) {
-        answerChildren[i].children[1].innerText =
-          section.questions[0].options[i];
-      }
+      questions = section.questions;
+      displayQuestions();
     }
   });
 }
@@ -86,4 +95,22 @@ function displayElements() {
   });
   submitBtn.classList.remove("invisible");
   submitBtn.classList.add("visible");
+}
+
+function select(button) {
+  [...answerChildren].forEach((child) => {
+    child.classList.remove("selected");
+  });
+  button.classList.add("selected");
+  selectedAnswer = button.children[1].innerText;
+}
+
+function displayQuestions() {
+  mainTitleQuestion.innerHTML = questions[counter].question;
+  for (let i = 0; i <= 3; i++) {
+    answerChildren[i].children[1].innerText = questions[counter].options[i];
+  }
+  counter++;
+  numberOfQuestions.innerText = `Question ${counter} of 10`;
+  numberOfQuestions.classList.add("visible");
 }
