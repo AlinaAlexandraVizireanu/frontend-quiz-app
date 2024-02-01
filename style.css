@@ -262,7 +262,7 @@ body.dark-mode::before {
   }
 
   .container {
-    margin-top: 3.375em;
+    margin-top: 2.5em;
     max-width: 640px;
   }
 
@@ -318,6 +318,14 @@ body.dark-mode::before {
     gap: 8px;
   }
 
+  .logo_categories {
+    gap: 16px;
+  }
+
+  .logo_categories-text {
+    font-size: 1.125rem;
+  }
+
   /* -------------------Style the main part------------------- */
   .main_section {
     margin-top: 3.625em;
@@ -362,6 +370,16 @@ body.dark-mode::before {
   .answer_text {
     font-size: 1.125rem;
     font-weight: 500;
+  }
+
+  div.submit_answer.visible {
+    font-size: 1.125rem;
+    margin-top: 0.833em;
+    padding-top: 1.055em;
+    padding-bottom: 1.055em;
+    border-radius: 0.75em;
+    color: #fff;
+    background-color: #a729f5;
   }
 
   .request_to_select.visible {
