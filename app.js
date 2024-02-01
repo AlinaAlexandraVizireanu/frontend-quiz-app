@@ -10,6 +10,7 @@ const answerIconText = document.querySelectorAll(".answer_icon-text");
 const answerParent = document.querySelector(".answer");
 const answerChildren = document.querySelectorAll('[class^="answer-"]');
 const submitBtn = document.querySelector(".submit_answer");
+const requestToSelectErr = document.querySelector(".request_to_select");
 let data = null;
 let questions = [];
 let counter = 0;
@@ -19,11 +20,18 @@ axios
   .get("data.json")
   .then((response) => {
     data = response.data.quizzes;
-    console.log(data);
   })
   .catch((error) => {
     console.log(error);
   });
+
+window.addEventListener("click", function (event) {
+  if (!answerParent.contains(event.target)) {
+    removeBorders();
+    requestToSelectErr.classList.remove("invisible");
+    requestToSelectErr.classList.add("visible");
+  }
+});
 
 toggleBrightnessBtn.addEventListener("click", function () {
   if (!document.body.classList.contains("dark-mode")) {
@@ -53,6 +61,7 @@ toggleBrightnessBtn.addEventListener("click", function () {
     getCategoryData(button.innerText);
     displayElements();
     select(button);
+    addBorders(button);
   });
 });
 
@@ -98,10 +107,6 @@ function displayElements() {
 }
 
 function select(button) {
-  [...answerChildren].forEach((child) => {
-    child.classList.remove("selected");
-  });
-  button.classList.add("selected");
   selectedAnswer = button.children[1].innerText;
 }
 
@@ -113,4 +118,21 @@ function displayQuestions() {
   counter++;
   numberOfQuestions.innerText = `Question ${counter} of 10`;
   numberOfQuestions.classList.add("visible");
+}
+
+function addBorders(button) {
+  [...answerChildren].forEach((child) => {
+    child.classList.remove("selected");
+  });
+  button.classList.add("selected");
+  if (requestToSelectErr.classList.contains("visible")) {
+    requestToSelectErr.classList.remove("visible");
+    requestToSelectErr.classList.add("invisible");
+  }
+}
+
+function removeBorders() {
+  [...answerChildren].forEach((child) => {
+    child.classList.remove("selected");
+  });
 }
