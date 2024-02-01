@@ -216,6 +216,16 @@ div.submit_answer.visible {
   background-color: #a729f5;
 }
 
+div.submit_answer.visible:hover {
+  cursor: pointer;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.5) 100%
+    ),
+    #a729f5;
+}
+
 .request_to_select.visible {
   display: flex;
   justify-content: center;
