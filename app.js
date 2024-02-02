@@ -11,6 +11,9 @@ const answerParent = document.querySelector(".answer");
 const answerChildren = document.querySelectorAll('[class^="answer-"]');
 const submitBtn = document.querySelector(".submit_answer");
 const requestToSelectErr = document.querySelector(".request_to_select");
+const progressBar = document.querySelector(".progress-bar");
+const computedStyle = getComputedStyle(progressBar);
+const width = parseFloat(computedStyle.getPropertyValue("--width")) || 0;
 let data = null;
 let questions = [];
 let counter = 0;
@@ -104,6 +107,10 @@ function displayElements() {
   });
   submitBtn.classList.remove("invisible");
   submitBtn.classList.add("visible");
+  numberOfQuestions.classList.remove("invisible");
+  numberOfQuestions.classList.add("visible");
+  progressBar.classList.remove("invisible");
+  progressBar.classList.add("visible");
 }
 
 function select(button) {
@@ -117,7 +124,8 @@ function displayQuestions() {
   }
   counter++;
   numberOfQuestions.innerText = `Question ${counter} of 10`;
-  numberOfQuestions.classList.add("visible");
+  currentProgress = counter / 10;
+  progressBar.style.setProperty("--width", width + currentProgress);
 }
 
 function addBorders(button) {

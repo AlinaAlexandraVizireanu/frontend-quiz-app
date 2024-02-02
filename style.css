@@ -104,6 +104,9 @@ header {
 
 .question {
   flex-basis: 465px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .main_title_question {
@@ -126,6 +129,27 @@ header {
 p.number_of_questions {
   margin-top: 0;
   margin-bottom: 1.35em;
+}
+
+.progress-bar {
+  background-color: #fff;
+  height: 16px;
+  border-radius: 62.43em;
+  position: relative;
+  margin-bottom: 8em;
+}
+
+.progress-bar::before {
+  content: "";
+  background-color: #a729f5;
+  position: absolute;
+  top: 50%;
+  left: 1%;
+  max-width: calc(100% - 2%);
+  width: calc(var(--width, 0) * 100%);
+  height: 8px;
+  border-radius: 62.43em;
+  transform: translateY(-50%);
 }
 
 /* -------Style the answer section------- */
