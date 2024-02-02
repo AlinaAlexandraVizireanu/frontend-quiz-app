@@ -136,7 +136,7 @@ p.number_of_questions {
   height: 16px;
   border-radius: 62.43em;
   position: relative;
-  margin-bottom: 8em;
+  margin-bottom: 7.25em;
 }
 
 .progress-bar::before {
@@ -321,6 +321,11 @@ body.dark-mode::before {
     margin-bottom: 0.857em;
   }
 
+  .progress-bar {
+    margin-bottom: 0;
+    margin-top: 2.5em;
+  }
+
   /* -------Style the answer section------- */
   .answer {
     flex-basis: auto;
@@ -377,6 +382,10 @@ body.dark-mode::before {
 
   .main_title p {
     font-size: 0.875rem;
+  }
+
+  .progress-bar {
+    margin-top: 1.5em;
   }
 
   /* -------Style the answer section------- */
