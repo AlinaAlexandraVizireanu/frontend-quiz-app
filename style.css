@@ -159,10 +159,10 @@ p.number_of_questions {
 }
 
 [class^="answer-"] {
+  position: relative;
   display: flex;
   gap: 32px;
   padding: 1.25em;
-  padding-right: 0;
   background-color: #fff;
   border-radius: 1.5em;
   cursor: pointer;
@@ -178,8 +178,39 @@ p.number_of_questions {
   background-color: #a729f5;
 }
 
+[class^="answer-"].selected.correct .answer_icon-text {
+  color: #fff;
+  background-color: #26d782;
+}
+
+[class^="answer-"].selected.wrong .answer_icon-text {
+  color: #fff;
+  background-color: #ee5454;
+}
+
+[class^="answer_icon"] {
+  align-self: center;
+}
+
+img.new-icon {
+  align-self: center;
+  position: absolute;
+  right: 0;
+  transform: translateX(-50%);
+}
+
 .selected {
   border: 3px solid #a729f5;
+  outline: none;
+}
+
+.correct {
+  border: 3px solid #26d782;
+  outline: none;
+}
+
+.wrong {
+  border: 3px solid #ee5454;
   outline: none;
 }
 

@@ -14,10 +14,17 @@ const requestToSelectErr = document.querySelector(".request_to_select");
 const progressBar = document.querySelector(".progress-bar");
 const computedStyle = getComputedStyle(progressBar);
 const width = parseFloat(computedStyle.getPropertyValue("--width")) || 0;
+const newIconCorrect = document.createElement("img");
+const newIconWrong = document.createElement("img");
 let data = null;
 let questions = [];
 let counter = 0;
 let selectedAnswer = null;
+
+newIconCorrect.classList.add("new-icon");
+newIconWrong.classList.add("new-icon");
+newIconCorrect.src = "./assets/images/icon-correct.svg";
+newIconWrong.src = "./assets/images/icon-incorrect.svg";
 
 axios
   .get("data.json")
@@ -70,9 +77,24 @@ toggleBrightnessBtn.addEventListener("click", function () {
 
 submitBtn.addEventListener("click", function () {
   if (questions[counter - 1].answer == selectedAnswer) {
+    [...answerChildren].forEach((child) => {
+      if (child.classList.contains("selected")) {
+        child.append(newIconCorrect);
+        child.classList.add("correct");
+      }
+    });
     setTimeout(displayQuestions, 2000);
   } else {
-    console.log("wrong");
+    [...answerChildren].forEach((child) => {
+      if (child.classList.contains("selected")) {
+        child.append(newIconWrong);
+        child.classList.add("wrong");
+      }
+      if (child.children[1].innerText == questions[counter - 1].answer) {
+        child.append(newIconCorrect);
+      }
+    });
+    setTimeout(displayQuestions, 2000);
   }
 });
 
@@ -118,6 +140,9 @@ function select(button) {
 }
 
 function displayQuestions() {
+  newIconCorrect.remove();
+  newIconWrong.remove();
+  removeBorders();
   mainTitleQuestion.innerHTML = questions[counter].question;
   for (let i = 0; i <= 3; i++) {
     answerChildren[i].children[1].innerText = questions[counter].options[i];
@@ -129,9 +154,7 @@ function displayQuestions() {
 }
 
 function addBorders(button) {
-  [...answerChildren].forEach((child) => {
-    child.classList.remove("selected");
-  });
+  removeBorders();
   button.classList.add("selected");
   if (requestToSelectErr.classList.contains("visible")) {
     requestToSelectErr.classList.remove("visible");
@@ -142,5 +165,10 @@ function addBorders(button) {
 function removeBorders() {
   [...answerChildren].forEach((child) => {
     child.classList.remove("selected");
+    if (child.classList.contains("correct")) {
+      child.classList.remove("correct");
+    } else if (child.classList.contains("wrong")) {
+      child.classList.remove("wrong");
+    }
   });
 }
