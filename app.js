@@ -11,15 +11,20 @@ const answerParent = document.querySelector(".answer");
 const answerChildren = document.querySelectorAll('[class^="answer-"]');
 const submitBtn = document.querySelector(".submit_answer");
 const requestToSelectErr = document.querySelector(".request_to_select");
+const endOfQuizSection = document.querySelector(".end_of_quiz");
+const endOfQuizTotalScore = document.querySelector(".end_of_quiz-total");
+const endOfQuizText = document.querySelector(".end_of_quiz-total-questions");
 const progressBar = document.querySelector(".progress-bar");
 const computedStyle = getComputedStyle(progressBar);
 const width = parseFloat(computedStyle.getPropertyValue("--width")) || 0;
 const newIconCorrect = document.createElement("img");
 const newIconWrong = document.createElement("img");
+let endOfQuizLogo = null;
 let data = null;
+let selectedAnswer = null;
 let questions = [];
 let counter = 0;
-let selectedAnswer = null;
+let total = 0;
 
 newIconCorrect.classList.add("new-icon");
 newIconWrong.classList.add("new-icon");
@@ -46,7 +51,10 @@ window.addEventListener("click", function (event) {
 toggleBrightnessBtn.addEventListener("click", function () {
   if (!document.body.classList.contains("dark-mode")) {
     document.body.classList.add("dark-mode");
+    progressBar.classList.add("dark-mode-children");
     mainTitleParagraph.classList.add("dark-mode-p");
+    numberOfQuestions.classList.add("dark-mode-p");
+    endOfQuizText.classList.add("dark-mode-p");
     logoSun.src = "./assets/images/icon-sun-light.svg";
     logoMoon.src = "./assets/images/icon-moon-light.svg";
 
@@ -55,7 +63,10 @@ toggleBrightnessBtn.addEventListener("click", function () {
     }
   } else {
     document.body.classList.remove("dark-mode");
+    progressBar.classList.remove("dark-mode-children");
     mainTitleParagraph.classList.remove("dark-mode-p");
+    numberOfQuestions.classList.remove("dark-mode-p");
+    endOfQuizText.classList.remove("dark-mode-p");
     logoSun.src = "./assets/images/icon-sun-dark.svg";
     logoMoon.src = "./assets/images/icon-moon-dark.svg";
 
@@ -83,6 +94,7 @@ submitBtn.addEventListener("click", function () {
         child.classList.add("correct");
       }
     });
+    total++;
     setTimeout(displayQuestions, 2000);
   } else {
     [...answerChildren].forEach((child) => {
@@ -102,6 +114,7 @@ function appendToHeader(element, elementText) {
   if (![...logoHeader.children].some((child) => child.tagName === "IMG")) {
     headerTitle.innerText = elementText.innerText;
     logoHeader.prepend(element);
+    endOfQuizLogo = logoHeader.cloneNode(true);
     mainTitleParagraph.classList.add("invisible");
     [...answerChildren]
       .filter((element) => {
@@ -143,14 +156,18 @@ function displayQuestions() {
   newIconCorrect.remove();
   newIconWrong.remove();
   removeBorders();
-  mainTitleQuestion.innerHTML = questions[counter].question;
-  for (let i = 0; i <= 3; i++) {
-    answerChildren[i].children[1].innerText = questions[counter].options[i];
+  if (counter < 1) {
+    mainTitleQuestion.innerHTML = questions[counter].question;
+    for (let i = 0; i <= 3; i++) {
+      answerChildren[i].children[1].innerText = questions[counter].options[i];
+    }
+    counter++;
+    numberOfQuestions.innerText = `Question ${counter} of 10`;
+    currentProgress = counter / 10;
+    progressBar.style.setProperty("--width", width + currentProgress);
+  } else {
+    endOfQuiz();
   }
-  counter++;
-  numberOfQuestions.innerText = `Question ${counter} of 10`;
-  currentProgress = counter / 10;
-  progressBar.style.setProperty("--width", width + currentProgress);
 }
 
 function addBorders(button) {
@@ -171,4 +188,20 @@ function removeBorders() {
       child.classList.remove("wrong");
     }
   });
+}
+
+function endOfQuiz() {
+  numberOfQuestions.classList.remove("visible");
+  numberOfQuestions.classList.add("invisible");
+  mainTitleQuestion.innerHTML = "Quiz completed <span>You scored...</span>";
+  progressBar.classList.remove("visible");
+  progressBar.classList.add("invisible");
+  endOfQuizSection.classList.remove("invisible");
+  endOfQuizSection.classList.add("visible");
+  [...answerChildren].forEach((child) => {
+    child.classList.add("invisible");
+  });
+  submitBtn.innerText = "Play Again";
+  endOfQuizSection.prepend(endOfQuizLogo);
+  endOfQuizTotalScore.innerText = `${total}`;
 }

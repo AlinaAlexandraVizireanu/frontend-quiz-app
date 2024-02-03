@@ -294,6 +294,31 @@ div.submit_answer.visible:hover {
   font-size: 1.5rem;
 }
 
+.end_of_quiz.visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 3em;
+  text-align: center;
+}
+
+.end_of_quiz-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.end_of_quiz-total {
+  font-size: 9rem;
+  font-weight: 500;
+}
+
+.end_of_quiz-total-questions {
+  font-size: 1.5rem;
+  color: #626c7f;
+}
+
 /* Classes for Dark Mode */
 
 body.dark-mode::before {
@@ -305,7 +330,10 @@ body.dark-mode::before {
   color: #fff;
 }
 
-.main_title p.dark-mode-p {
+.main_title p.dark-mode-p,
+.end_of_quiz-total-questions.dark-mode-p,
+.end_of_quiz-total-questions.dark-mode-p,
+.number_of_questions.dark-mode-p {
   color: #abc1e1;
 }
 
@@ -467,6 +495,19 @@ body.dark-mode::before {
   .request_to_select img {
     width: 32px;
     height: 32px;
+  }
+
+  .end_of_quiz.visible {
+    gap: 16px;
+    padding: 2em;
+  }
+
+  .end_of_quiz-total {
+    font-size: 5.5rem;
+  }
+
+  .end_of_quiz-total-questions {
+    font-size: 1.125rem;
   }
 }
 
