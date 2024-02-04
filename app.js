@@ -41,7 +41,11 @@ axios
   });
 
 window.addEventListener("click", function (event) {
-  if (!answerParent.contains(event.target)) {
+  if (
+    !answerParent.contains(event.target) &&
+    submitBtn.innerText == "Submit Answer" &&
+    submitBtn.classList.contains("visible")
+  ) {
     removeBorders();
     requestToSelectErr.classList.remove("invisible");
     requestToSelectErr.classList.add("visible");
