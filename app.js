@@ -51,6 +51,7 @@ window.addEventListener("click", function (event) {
 toggleBrightnessBtn.addEventListener("click", function () {
   if (!document.body.classList.contains("dark-mode")) {
     document.body.classList.add("dark-mode");
+    requestToSelectErr.classList.add("dark-mode-error");
     progressBar.classList.add("dark-mode-children");
     mainTitleParagraph.classList.add("dark-mode-p");
     numberOfQuestions.classList.add("dark-mode-p");
@@ -63,6 +64,7 @@ toggleBrightnessBtn.addEventListener("click", function () {
     }
   } else {
     document.body.classList.remove("dark-mode");
+    requestToSelectErr.classList.remove("dark-mode-error");
     progressBar.classList.remove("dark-mode-children");
     mainTitleParagraph.classList.remove("dark-mode-p");
     numberOfQuestions.classList.remove("dark-mode-p");

@@ -342,6 +342,10 @@ body.dark-mode::before {
   color: #fff;
 }
 
+.request_to_select.dark-mode-error p {
+  color: #f4f6fa;
+}
+
 /* Implement Media Queries for tablet screen size */
 
 @media (max-width: 1200px) {
