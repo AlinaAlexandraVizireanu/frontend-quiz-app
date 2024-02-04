@@ -93,26 +93,30 @@ toggleBrightnessBtn.addEventListener("click", function () {
 });
 
 submitBtn.addEventListener("click", function () {
-  if (questions[counter - 1].answer == selectedAnswer) {
-    [...answerChildren].forEach((child) => {
-      if (child.classList.contains("selected")) {
-        child.append(newIconCorrect);
-        child.classList.add("correct");
-      }
-    });
-    total++;
-    setTimeout(displayQuestions, 2000);
+  if (submitBtn.innerText != "Play Again") {
+    if (questions[counter - 1].answer == selectedAnswer) {
+      [...answerChildren].forEach((child) => {
+        if (child.classList.contains("selected")) {
+          child.append(newIconCorrect);
+          child.classList.add("correct");
+        }
+      });
+      total++;
+      setTimeout(displayQuestions, 2000);
+    } else {
+      [...answerChildren].forEach((child) => {
+        if (child.classList.contains("selected")) {
+          child.append(newIconWrong);
+          child.classList.add("wrong");
+        }
+        if (child.children[1].innerText == questions[counter - 1].answer) {
+          child.append(newIconCorrect);
+        }
+      });
+      setTimeout(displayQuestions, 2000);
+    }
   } else {
-    [...answerChildren].forEach((child) => {
-      if (child.classList.contains("selected")) {
-        child.append(newIconWrong);
-        child.classList.add("wrong");
-      }
-      if (child.children[1].innerText == questions[counter - 1].answer) {
-        child.append(newIconCorrect);
-      }
-    });
-    setTimeout(displayQuestions, 2000);
+    playAgain();
   }
 });
 
@@ -121,12 +125,18 @@ function appendToHeader(element, elementText) {
     headerTitle.innerText = elementText.innerText;
     logoHeader.prepend(element);
     endOfQuizLogo = logoHeader.cloneNode(true);
+    if (mainTitleParagraph.classList.contains("visible")) {
+      mainTitleParagraph.classList.remove("visible");
+    }
     mainTitleParagraph.classList.add("invisible");
     [...answerChildren]
       .filter((element) => {
         return element.children[0].children[0].tagName === "IMG";
       })
       .forEach((element) => {
+        if (element.children[0].children[0].classList.contains("visible")) {
+          element.children[0].children[0].classList.remove("visible");
+        }
         element.children[0].children[0].classList.add("invisible");
       });
   }
@@ -162,7 +172,7 @@ function displayQuestions() {
   newIconCorrect.remove();
   newIconWrong.remove();
   removeBorders();
-  if (counter < 1) {
+  if (counter < 10) {
     mainTitleQuestion.innerHTML = questions[counter].question;
     for (let i = 0; i <= 3; i++) {
       answerChildren[i].children[1].innerText = questions[counter].options[i];
@@ -210,4 +220,41 @@ function endOfQuiz() {
   submitBtn.innerText = "Play Again";
   endOfQuizSection.prepend(endOfQuizLogo);
   endOfQuizTotalScore.innerText = `${total}`;
+  counter = 0;
+}
+
+function playAgain() {
+  const categoriesText = ["HTML", "CSS", "JavaScript", "Accessibility"];
+  logoHeader.children[0].remove();
+  headerTitle.innerText = "";
+  mainTitleQuestion.innerHTML = "Welcome to the <span>Frontend Quiz!</span>";
+  mainTitleParagraph.classList.remove("invisible");
+  mainTitleParagraph.classList.add("visible");
+  [...answerIconText].forEach((icon) => {
+    icon.classList.remove("visible");
+    icon.classList.add("invisible");
+  });
+
+  [...answerChildren]
+    .filter((element) => {
+      return element.children[0].children[0].tagName === "IMG";
+    })
+    .forEach((element) => {
+      element.children[0].children[0].classList.remove("invisible");
+      element.children[0].children[0].classList.add("visible");
+    });
+  [...answerChildren].forEach((child) => {
+    child.classList.remove("invisible");
+    if (child.children[0].children[0].tagName != "IMG") {
+      child.children[0].prepend(endOfQuizLogo.children[0]);
+    }
+  });
+  for (let i = 0; i < categoriesText.length; i++) {
+    answerChildren[i].children[1].innerText = categoriesText[i];
+  }
+  endOfQuizSection.classList.remove("visible");
+  endOfQuizSection.classList.add("invisible");
+  submitBtn.classList.remove("visible");
+  submitBtn.classList.add("invisible");
+  submitBtn.innerText = "Submit Answer";
 }
