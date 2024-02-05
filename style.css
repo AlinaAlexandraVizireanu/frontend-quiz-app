@@ -137,6 +137,7 @@ p.number_of_questions {
   border-radius: 62.43em;
   position: relative;
   margin-bottom: 7.25em;
+  margin-top: 2em;
 }
 
 .progress-bar::before {
@@ -223,6 +224,10 @@ img.new-icon {
   align-self: center;
   font-size: 1.75rem;
   font-weight: 500;
+}
+
+.answer_text {
+  max-width: 392px;
 }
 
 .answer_icon-A__img {

@@ -173,7 +173,7 @@ function displayQuestions() {
   newIconWrong.remove();
   removeBorders();
   if (counter < 10) {
-    mainTitleQuestion.innerHTML = questions[counter].question;
+    mainTitleQuestion.innerText = questions[counter].question;
     for (let i = 0; i <= 3; i++) {
       answerChildren[i].children[1].innerText = questions[counter].options[i];
     }
@@ -221,6 +221,7 @@ function endOfQuiz() {
   endOfQuizSection.prepend(endOfQuizLogo);
   endOfQuizTotalScore.innerText = `${total}`;
   counter = 0;
+  total = 0;
 }
 
 function playAgain() {
@@ -247,6 +248,7 @@ function playAgain() {
     child.classList.remove("invisible");
     if (child.children[0].children[0].tagName != "IMG") {
       child.children[0].prepend(endOfQuizLogo.children[0]);
+      endOfQuizLogo.remove();
     }
   });
   for (let i = 0; i < categoriesText.length; i++) {
