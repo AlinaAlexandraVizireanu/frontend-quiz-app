@@ -49,6 +49,7 @@ window.addEventListener("click", function (event) {
     removeBorders();
     requestToSelectErr.classList.remove("invisible");
     requestToSelectErr.classList.add("visible");
+    selectedAnswer = null;
   }
 });
 
@@ -109,11 +110,21 @@ submitBtn.addEventListener("click", function () {
           child.append(newIconWrong);
           child.classList.add("wrong");
         }
-        if (child.children[1].innerText == questions[counter - 1].answer) {
+        if (
+          child.children[1].innerText == questions[counter - 1].answer &&
+          !requestToSelectErr.classList.contains("visible")
+        ) {
           child.append(newIconCorrect);
         }
       });
-      setTimeout(displayQuestions, 2000);
+      if (!requestToSelectErr.classList.contains("visible")) {
+        setTimeout(displayQuestions, 2000);
+      } else {
+        requestToSelectErr.classList.add("shake");
+        setTimeout(() => {
+          requestToSelectErr.classList.remove("shake");
+        }, 500);
+      }
     }
   } else {
     playAgain();
